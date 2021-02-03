@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Hotel Bahía Olivo`,
+    description: `Hotel en Villa de Leyva, Hotel Boutique y Spa Bahia Olivo, sobre la avenida circunvalar muy cerca a la Plaza Principal y el centro histórico de Villa de Leyva.`,
+    author: `Hotel Bahía Olivo, Villa de Leyva`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,9 +24,29 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+        resolve: `gatsby-plugin-emotion`,
+        options: {
+            'cssPropOptimization': true 
+        }
+    },
+    {
+        resolve: "gatsby-source-wordpress",
+        options: {
+            baseUrl: "bahiaolivo.i180.co",
+            protocol: "https",
+            hostingWPCOM: false,
+            useACF: true,
+            verboseOutput: false,
+        },
+        includedRoutes: [
+            "**/habitaciones",
+            "**/planes"
+          ],
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

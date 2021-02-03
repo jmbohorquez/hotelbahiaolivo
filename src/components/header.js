@@ -1,42 +1,46 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { Link } from "gatsby"
+import { graphql, useStaticQuery } from 'gatsby';
+import styled from '@emotion/styled';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import Nav from './nav';
+import SocialFollow from './socialFollow';
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+const HeaderContainer = styled.div`
+    height: 100%;
+    width: 100%;
+`;
+
+const Header = () => {
+
+    const { logo } = useStaticQuery(graphql`
+        query {
+            logo: file(relativePath: {eq: "logo.svg"}) {
+                publicURL
+            }
+        }
+    `)
+
+    
+
+    return (
+    
+        <HeaderContainer>
+            <header className="header">
+                <figure>
+                    <Link to="/">
+                        <img src={ logo.publicURL } alt="Hotel Bahía Olivo Villa e Leyva" />
+                    </Link>
+                </figure>
+                <nav>
+                    <Nav />  
+                </nav>
+                <SocialFollow />
+            </header>
+        </HeaderContainer>
+        
+    )
+
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;
